@@ -1,33 +1,30 @@
 # Finalpracticalexam
 นายญาณวรุฒม์ บัวอินทร์ 683450054-3
-Class Program {
-    + Main(args: string[]) : void
-    - AddSubject(course: List<Subject>) : void
-    - AddStudent(course: List<Subject>) : void
-    - ShowStudents(course: List<Subject>) : void
-    - ShowStatistics(course: List<Subject>) : void
-}
 
-Class Subject {
-    + SubjectCode : string
-    + SubjectName : string
-    + Students : List<Student>
-
-    + Subject()
-    + Subject(code: string, name: string)
-    + RegisterUser(code: string, name: string) : void
-}
-
-Class Student {
-    + StudentID : string
-    + FullName : string
-    + Score : double
-    + Grade : string
-
-    + Student(id: string, name: string, score: double)
-    - CalculateGrade(score: double) : string
-}
-
-Program ..> Subject
-Program ..> Student
-Subject "1" o-- "0..*" Student
+classDiagram
+    class Program {
+        static void Main(string[] args)
+        +void AddSubject(List~Subject~ course)
+        +void AddStudent(List~Subject~ course)
+        +void ShowStudents(List~Subject~ course)
+        +void ShowStatistics(List~Subject~ course)
+    }
+    class Subject {
+        string SubjectCode
+        string SubjectName
+        List~Student~ Students
+        +Subject()
+        +Subject(string code, string name)
+        +void RegisterUser(string subjectCode, string subjectName)
+    }
+    class Student {
+        string StudentID
+        string FullName
+        double Score
+        string Grade
+        +Student(string id, string name, double score)
+        -string CalculateGrade(double score)
+    }
+    Program --> Subject
+    Program --> Student
+    Subject --> Student
