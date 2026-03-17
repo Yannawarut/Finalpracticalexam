@@ -1,43 +1,33 @@
 # Finalpracticalexam
 นายญาณวรุฒม์ บัวอินทร์ 683450054-3
-+----------------------+
-|       Program        |
-+----------------------+
-| - Main(string[] args)|
-| - AddSubject(course) |
-| - AddStudent(course) |
-| - ShowStudents(course)|
-| - ShowStatistics(course)|
-+----------------------+
+Class Program {
+    + Main(args: string[]) : void
+    - AddSubject(course: List<Subject>) : void
+    - AddStudent(course: List<Subject>) : void
+    - ShowStudents(course: List<Subject>) : void
+    - ShowStatistics(course: List<Subject>) : void
+}
 
-            |
-            | uses
-            v
+Class Subject {
+    + SubjectCode : string
+    + SubjectName : string
+    + Students : List<Student>
 
-+----------------------+
-|       Subject        |
-+----------------------+
-| + SubjectCode : string
-| + SubjectName : string
-| + Students : List<Student>
-+----------------------+
-| + Subject()          |
-| + Subject(code,name) |
-| + RegisterUser(code,name) |
-+----------------------+
+    + Subject()
+    + Subject(code: string, name: string)
+    + RegisterUser(code: string, name: string) : void
+}
 
-            |
-            | 1 ---- * (Aggregation)
-            v
+Class Student {
+    + StudentID : string
+    + FullName : string
+    + Score : double
+    + Grade : string
 
-+----------------------+
-|       Student        |
-+----------------------+
-| + StudentID : string |
-| + FullName : string  |
-| + Score : double     |
-| + Grade : string     |
-+----------------------+
-| + Student(id,name,score) |
-| - CalculateGrade(score)  |
-+----------------------+
+    + Student(id: string, name: string, score: double)
+    - CalculateGrade(score: double) : string
+}
+
+Program ..> Subject
+Program ..> Student
+Subject "1" o-- "0..*" Student
